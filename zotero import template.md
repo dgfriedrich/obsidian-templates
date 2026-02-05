@@ -33,7 +33,7 @@ collection: "{{collections[0].name}}"
 >
 > {% if bibliography %}**Bibliography**: {{bibliography|replace("\n"," ")}}{% endif %}
 > 
-> **Authors**:: {% for a in creators %} [[{{a.firstName}} {{a.lastName}}]]{% if not loop.last %}, {% endif %}{% endfor %}
+> **Authors**:: {% for a in creators %} {{a.firstName}} {{a.lastName}}{% if not loop.last %}, {% endif %}{% endfor %}
 > 
 > {% if hashTags %}**Tags**: {{hashTags}}{% endif %}
 > 
