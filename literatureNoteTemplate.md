@@ -9,7 +9,6 @@ year: {{date | format("YYYY")}}
 noteType: literatureNote
 status: 
 summary:
-parameterx:
 ---
 
 ## [{{title}}]({{desktopURI}})
