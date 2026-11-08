@@ -66,19 +66,6 @@ parameterx:
 {%- endif -%}
 {%- endmacro -%}
 
-{% macro calloutCharacter(color) -%}
-{%- if color == "#5fb236" -%}$
-{%- elif color == "#2ea8e5" -%}@
-{%- elif color == "#ffd400" -%}&
-{%- elif color == "#a28ae5" -%}~
-{%- elif color == "#ff6666" -%}!
-{%- elif color == "#e56eee" -%}€
-{%- elif color == "#f19837" -%}?
-{%- elif color == "#aaaaaa" -%}%
-{%- else -%}•
-{%- endif -%}
-{%- endmacro %}
-
 {% persist "annotations" %}
 {% set annotations = annotations | filterby("date", "dateafter", lastImportDate) -%}
 {% if annotations.length > 0 %}
@@ -98,12 +85,12 @@ parameterx:
 
 {% elif (annotation.comment or []).indexOf("todo ") !== -1 %}
 - [x] **{{annotation.comment | replace("todo ", "")}}**:{% if not annotation.annotatedText %} [(p. {{annotation.pageLabel}})](zotero://open-pdf/library/items/{{annotation.attachment.itemKey}}?page={{annotation.pageLabel}}&annotation={{annotation.id}}){% else %} ✅ 2024-05-28
-	- {{calloutCharacter(annotation.color)}} {{annotation.annotatedText | nl2br}} [(p. {{annotation.pageLabel}})](zotero://open-pdf/library/items/{{annotation.attachment.itemKey}}?page={{annotation.pageLabel}}&annotation={{annotation.id}}) {% if annotation.hashTags %}{{annotation.hashTags}}{% endif -%}{% endif -%}
+	- {{annotation.annotatedText | nl2br}} [(p. {{annotation.pageLabel}})](zotero://open-pdf/library/items/{{annotation.attachment.itemKey}}?page={{annotation.pageLabel}}&annotation={{annotation.id}}) {% if annotation.hashTags %}{{annotation.hashTags}}{% endif -%}{% endif -%}
 {% elif annotation.comment %}
 - **{{annotation.comment}}**:{% if not annotation.annotatedText %} [(p. {{annotation.pageLabel}})](zotero://open-pdf/library/items/{{annotation.attachment.itemKey}}?page={{annotation.pageLabel}}&annotation={{annotation.id}}){% else %}
-	- {{calloutCharacter(annotation.color)}} {{annotation.annotatedText | nl2br}} [(p. {{annotation.pageLabel}})](zotero://open-pdf/library/items/{{annotation.attachment.itemKey}}?page={{annotation.pageLabel}}&annotation={{annotation.id}}) {% if annotation.hashTags %}{{annotation.hashTags}}{% endif -%}{% endif %}
+	- {{annotation.annotatedText | nl2br}} [(p. {{annotation.pageLabel}})](zotero://open-pdf/library/items/{{annotation.attachment.itemKey}}?page={{annotation.pageLabel}}&annotation={{annotation.id}}) {% if annotation.hashTags %}{{annotation.hashTags}}{% endif -%}{% endif %}
 {%- elif annotation.annotatedText %}
-- {{calloutCharacter(annotation.color)}} {{annotation.annotatedText | nl2br}} [(p. {{annotation.pageLabel}})](zotero://open-pdf/library/items/{{annotation.attachment.itemKey}}?page={{annotation.pageLabel}}&annotation={{annotation.id}}) {% if annotation.hashTags %}{{annotation.hashTags}}{% endif %}
+- {{annotation.annotatedText | nl2br}} [(p. {{annotation.pageLabel}})](zotero://open-pdf/library/items/{{annotation.attachment.itemKey}}?page={{annotation.pageLabel}}&annotation={{annotation.id}}) {% if annotation.hashTags %}{{annotation.hashTags}}{% endif %}
 {%- endif -%}{%- endfor %}
 
 {% endfor -%}
